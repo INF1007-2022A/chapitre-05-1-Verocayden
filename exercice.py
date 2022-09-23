@@ -9,9 +9,10 @@ def convert_to_absolute(number: float) -> float:
     if number < 0:
         number *= -1
     return number
+# More advvanced function: abs()
 
 
-def use_prefixes() -> List[str]:
+def use_prefixes() -> list[str]:
     prefixes, suffixe = 'JKLMNOPQ', 'ack'
     names = []
     for letter in prefixes:
@@ -20,62 +21,55 @@ def use_prefixes() -> List[str]:
 
 
 def prime_integer_summation() -> int:
-    count = 1
-    prime_count = 0
-    summation = 0
-    while prime_count <= 100:
-        is_prime = True
-        for i in range(2, count-1):
-            if (count % i) == 0:
-                is_prime = False
-        if is_prime == True:
-            summation += count
-            prime_count += 1
-        count += 1
-    summation -= 1
+    count = 0
+    number = 2
+    sum = 0
 
-    return summation
+    while count < 100:
+
+        for i in range(2, number):
+            if number % i == 0: # Not prime
+                break
+        else: # Prime
+            count += 1
+            sum += number
+
+        number += 1
+
+    return sum
 
 def factorial(number: int) -> int:
-    count = 1
     factorial = 1
-    while count < number:
-        factorial *= count
-        count += 1
+    for i in range(2, number+1): # Start at 2 and stops at number (included).
+        factorial *= i
     return factorial
 
 
 def use_continue() -> None:
-    count = 1
-    while count <= 10:
-        if count == 5:
-            count += 1
+    for i in range(1, 10+1):
+        if i == 5:
             continue
-        elif count !=5:
-            print(count)
-            count += 1
-
+        print(i)
 
 def verify_ages(groups: List[List[int]]) -> List[bool]:
-    group_list = []
+    result = ""
     for group in groups:
         if 25 in group:
-            group_list.append('True')
-        elif len(group) <= 3 or len(group) > 10:
-            group_list.append('False')
-        else:
-            for age in group:
-                if age < 18:
-                    group_list.append("False")
-                    break
-                elif age > 70:
-                    if age == 50:
-                        group_list.append("False")
-                        break
-            else:
-                group_list.append('True')
+            result += f"{str(True)} "
+            continue
+        if len(group) <= 3 or len(group) > 10:
+            result += f"{str(False)} "
+            continue
+        if min(group) < 18:
+            result += f"{str(False)} "
+            continue
+        if max(group) > 70 and 50 in group:
+            result += f"{str(False)} "
+            continue
 
-    return group_list
+        result += f"{str(True)} "
+
+    return result.split()
 
 
 def main() -> None:
